@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de Estoque</title>
+    <link rel="stylesheet" href="../html/Css_padrao.css">
+    <style>
+        
+        .input-radio-group {
+            display: flex;
+            border: 2px solid #898989!important; /* Borda da caixa */
+            border-radius: 5px; /* Cantos arredondados */
+            padding: 1px; /* Espaçamento interno */
+            background-color: #898989; /* Cor de fundo */
+            margin-right: 10px;
+           
+            transform: translateX(+5%);
+            
+        }
+        
+        .custom-radio {
+            position: relative;
+            padding-left: 30px; /* Espaço para o círculo */
+            cursor: pointer; /* Mão ao passar o mouse */
+            margin-right: 70px; /* Espaçamento entre opções */
+            font-size: 15px !important; /* Tamanho da fonte */
+            color: rgb(255, 255, 255);
+            margin-left: 10px;
+        }
+        
+        .custom-radio input {
+            display: none; /* Esconder o input padrão */
+        }
+        
+        .radio-checkmark {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            height: 20px; /* Altura do círculo */
+            width: 20px; /* Largura do círculo */
+            background-color: white; /* Cor de fundo do círculo */
+            border: 2px solid #3498db; /* Borda do círculo */
+            border-radius: 50%; /* Tornar o círculo */
+            transform: translateY(-50%); /* Centraliza verticalmente */
+            
+        }
+        
+        .custom-radio input:checked + .radio-checkmark {
+            background-color: #3498db; /* Cor do círculo quando selecionado */
+        }
+        
+        .radio-checkmark::after {
+            content: "";
+            display: none;
+        }
+        
+        .custom-radio input:checked + .radio-checkmark::after {
+            display: block; /* Mostrar o ponto interno */
+            width: 10px; /* Largura do ponto */
+            height: 10px; /* Altura do ponto */
+            border-radius: 50%; /* Tornar o ponto redondo */
+            background: white; /* Cor do ponto */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Centralizar o ponto */
+        }
+        
+        
+        
+        
+            </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="../html/imagens/logo_1.jfif" alt="GDE">
+            <h1>G E</h1>
+            <h3>Login</h3>
+            <img class="logos" src="../html/imagens/logo_google.png" alt="Logo Google">
+            <img class="logos" src="../html/imagens/apple-logo-1-1.png" alt="Logo Apple">
+        </header>
+        <main class="main">
+            <form action="../php/login.php" method="post">
+                <div class="input-radio-group">
+                    <label class="custom-radio">
+                        <input type="radio" name="opcao" value="opcao1" id="opcao1">
+                        <span class="radio-checkmark"></span>
+                        Gerente
+                    </label>
+                    <label class="custom-radio">
+                        <input type="radio" name="opcao" value="opcao2" id="opcao2">
+                        <span class="radio-checkmark"></span>
+                        Operador
+                    </label>
+                </div><br>
+
+                <div class="input-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Digite seu email" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="senha">Senha:</label>
+                    <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+                </div>
+
+                <button type="submit">Entrar</button>
+            </form>
+            <p>Ainda não tem conta? <a href="../html/cadastrarUsuario.html">Cadastre-se</a></p>
+        </main>
+    </div>
+</body>
+</html>

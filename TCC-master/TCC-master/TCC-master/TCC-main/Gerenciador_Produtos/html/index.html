@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de Estoque</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    
+    <style>
+        /* Estilos gerais */
+     
+        /* Estilos gerais */
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            color: white;
+            background-color: rgb(80, 80, 80);
+            font-family: Arial, sans-serif;
+           
+        }
+
+        .content_form {
+            background-color: rgb(51, 51, 51);
+            border-radius: 20px;
+            padding: 30px;
+            width: 285px; /* Ajuste o tamanho conforme necessário */
+            margin-top: 6%; /* Distância do topo da página */
+            margin-left: 100px;
+            height: 426px;
+            font-size: 15px;
+            border: 1px solid #848484
+            
+            
+            
+            
+        }
+        input{
+            border-radius: 8px;
+            width: 250px;
+            height: 20px;
+            margin-top: -7px;
+           
+        }
+        .descricao{
+            height: 50px;
+        }
+        .content_form legend{
+            width: auto; /* Garante que o tamanho seja automático para centralizar corretamente */
+            margin: 0 auto; /* Centraliza horizontalmente */
+            font-size: 1.3em; /* Tamanho da fonte */
+            color: white; /* Cor do texto */
+            padding-bottom: 10px; /* Espaço abaixo do texto */
+            border-bottom: 1px solid #ddd; /* Linha de separação */
+            
+        }
+
+        /* Estilos para a barra de navegação lateral */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 73px;
+            height: 90%;
+            width: 80px; /* Largura da barra lateral */
+            background-color: #333;
+            padding-top: -100px;
+            color: rgba(255, 255, 255, 0.813);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Centraliza verticalmente os itens */
+            align-items: center; /* Centraliza horizontalmente os itens */
+           
+           
+        }
+
+        .sidebar a {
+            padding: 10px;
+            text-decoration: none;
+            color: white;
+            display: block;
+            margin-bottom: 10px; /* Espaço entre os links */
+            font-size: 10px;
+            text-align: center;
+           
+        }
+
+        /* Estilos para a barra de navegação horizontal */
+        .navbar {
+            position: fixed;
+            top: 0;
+            height: 63px;
+            width: 100%;
+            background-color: #3e3e3e;/*cabeçalho*/
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px;
+            filter: invert(0.00);
+            
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            font-size: 13px;
+            transform: -100px !important;
+           
+        }
+
+        .navbar a:first-child {
+            margin-right: auto; /* Empurra o primeiro link para a esquerda */
+        }
+
+     
+
+        /* Estilo para o link de imagem */
+        .navbar img {
+            height: 40px; /* Altura da imagem */
+            margin-right: 2px; /* Espaço à direita da imagem */
+            width: 30px;
+            height: 30px;
+            
+        
+
+            
+        }
+        .img_logo img {
+            height: 50px; /* Altura da imagem */
+            margin-right: 100px; /* Espaço à direita da imagem */ 
+            width: 50px;
+            filter: invert(0.00);
+
+
+        }
+
+       
+
+
+        
+        
+        .sidebar img {
+            width: 37px; /* Redimensiona a largura da imagem para 80% do tamanho do container pai (.sidebar) */
+            height: auto; /* Mantém a proporção da altura automaticamente */
+            display: block; /* Remove espaços extras ao redor da imagem */
+            margin-bottom:5px; /* Espaçamento abaixo da imagem */
+            padding-left: 13px;
+            margin-top: 15px;
+        }
+        .image-link {
+            display: inline-block;
+            text-decoration: none;
+            border: 2px solid #333;
+            padding: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar a:hover span  {
+            
+            color: #c2c1c1;
+           
+                    }
+        
+                    .sidebar a img:hover{
+                        transform: scale(1.1); /* Aumenta o ícone levemente */
+                        transition: 0.3s; /* Suaviza a transição */
+                        opacity: 0.8; /* Torna o ícone levemente transparente ao passar o mouse */
+                        color: #333;
+        
+                    }
+        
+        
+        
+        
+                .navbar h1{
+                    margin-top: -10%;
+                    font-size: 20px;
+                    margin-left: 100px;
+                    font-family: Tahoma, Verdana, sans-serif;
+        
+                }
+        
+                .navbar a:hover span {
+            color: #c2c1c1; /* Muda a cor do texto */
+        }
+        
+        .navbar a img:hover {
+            
+        
+        opacity: 0.8; /* Torna o ícone levemente transparente ao passar o mouse */
+            color: #333;
+            transform: scale(1.1); /* Aumenta o ícone levemente */
+        transition: 0.3s; /* Suaviza a transição */
+        }
+
+        .hist img{
+            width: 60px;
+            height: 60px;
+            margin-left: 5px;
+            
+            filter: invert(0.90 );
+            margin-bottom:  10px;
+
+        }
+
+        h1{
+            font-size: 10px;
+            margin-left: 680px;
+         
+        }
+
+        /* Estilo para os ícones e links */
+.h2-group {
+    display: flex;
+    justify-content: space-around; /* Ajuste para espaçamento uniforme entre os ícones */
+    align-items: center;
+    flex-direction: row; /* Alinha os itens na horizontal */
+    gap: 20px; /* Ajustei o gap para ficar um pouco mais espaçado */
+    margin-top: 40px; /* Ajustei a margem para dar um espaçamento melhor na parte superior */
+    text-align: center;
+}
+
+.h2-group div {
+    text-align: center;
+}
+
+.h2-group img {
+    width: 100px; /* Aumentei a largura para dar mais destaque aos ícones */
+    height: 100px; /* Aumentei a altura para manter as proporções */
+    margin-bottom: 10px;
+    filter: invert(0.90);
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.h2-group img:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+}
+
+.h2-group h2 {
+    font-size: 1.2em;
+    color: white;
+}
+
+/* Estilo para links */
+.h2-group a {
+    text-decoration: none;
+}
+
+.h2-group a:hover h2 {
+    color: #ff0000;
+}
+
+
+        .input-group{
+    display: flex;
+    align-items: center;
+    background-color: #3e3e3e;
+    padding: 9px;
+    border-radius: 10px;
+    gap: 8px;
+
+}
+.input-icon{
+    min-width: 32px;
+    min-height: 32px;
+    align-items: center;
+    display: flex;
+    border-radius: 100%;
+    filter: invert(0.89);
+    transform:translateY(-3px)
+    translate(45px)
+    
+    
+}
+.input-field{
+    width: 200px;
+    border: none;
+    
+
+}
+.content_table{
+    background-color: rgb(230, 230, 230);
+            border-radius: 5px;
+            padding: 30px;
+            width: 250px; /* Ajuste o tamanho conforme necessário */
+            margin-top: 6%; /* Distância do topo da página */
+            margin-left: -15px;
+            height: 150px;
+            font-size: 15px;
+            border: 1px solid #000000
+            100%;
+            overflow: auto;
+            color: #000000;
+            
+            
+            
+            
+            
+}     
+
+/* Tema Claro */
+body.light-mode {
+    background-color: rgb(196, 196, 196);
+    color: #333;
+}
+.container-search.ligth-mode{
+background-color: #c2c1c1;
+color: #000;
+}
+
+/* Tema Claro para .content_form */
+.content_form.light-mode {
+    background-color: #e9e9e9;
+    color: #000000;
+    border: 1px solid #000000;
+
+}
+.content_form.light-mode legend{
+    color: #000;
+    border: #000;
+}
+
+/* Tema Claro para .content_table */
+.content_table.light-mode {
+    background-color: #f9f9f9;
+    color: #000000;
+    border: 1px solid #000000;
+}
+
+/* Ajuste geral para tabelas */
+.content_table.light-mode th, 
+.content_table.light-mode td {
+    border: 1px solid #000000;
+}
+
+
+/* Tema Claro - Barra Lateral e Barra de Navegação */
+.sidebar.light-mode {
+    background-color: rgb(175, 175, 175);
+    color: #ffffff;
+    
+}
+.sidebar.light-mode img {
+    filter: invert(1); /* Inverte as cores da imagem */
+    transition: filter 0.3s ease; /* Suaviza a transição */
+}
+
+.sidebar.light-mode a {
+    color: #000000;
+}
+
+.sidebar.light-mode a:hover span {
+    color: #6d6d6d;
+}
+
+.navbar.light-mode {
+    background-color: rgb(175, 175, 175);
+    color: #000;
+}
+.navbar.light-mode img{
+    filter: invert(1);
+    transition: filter 0.3s ease;
+
+}.navbar.light-mode a img{
+    filter: invert(1);
+    transition: filter 0.3s ease;
+
+}
+/* Tema Claro - Estilo para o container da barra de pesquisa */
+.container-search.light-mode {
+    background-color: rgb(175, 175, 175); /* Fundo branco no tema claro */
+    color: #000000; /* Texto preto no tema claro */
+    
+}
+
+/* Tema Claro - Estilo para a barra de pesquisa */
+.input-group.light-mode {
+    background-color: rgb(175, 175, 175); /* Fundo claro */
+    
+}
+
+/* Tema Claro - Ícone da barra de pesquisa */
+.input-icon.light-mode {
+    
+    filter: invert(-1);
+}
+
+.navbar.light-mode a {
+    color: #000000;
+}
+
+.navbar.light-mode a:hover {
+    color: #000000;
+}
+
+.navbar.light-mode .img_logo img {
+    filter: brightness(0.7); /* Ajusta a imagem no tema claro */
+    filter: invert(1);
+    cursor: pointer;
+}
+.icon-hist.light-mode {
+    background-color: #f0f0f0; /* Cor de fundo no tema claro */
+    color: #000; /* Cor do texto no tema claro */
+}
+
+       
+/* Estilo para o tema claro */
+body.light-mode {
+    background-color: rgb(196, 196, 196);
+    color: black;
+}
+
+.sidebar.light-mode,
+.navbar.light-mode,
+.content_form.light-mode,
+.content_table.light-mode,
+.container-search.light-mode {
+    background-color: rgb(175, 175, 175);
+    color: #000000;
+}
+
+/* Ícones no meio com tema claro */
+.hist img.light-mode,
+.maior img.light-mode,
+.graf img.light-mode {
+    filter: invert(1); /* Inverte as cores no tema claro */
+}
+
+.h2-group.light-mode h2 {
+    color: #000;
+}
+
+.h2-group.light-mode img {
+    filter: invert(1);
+}
+
+.h2-group a:hover h2 {
+    color: #ff0000; /* Cor do texto ao passar o mouse */
+}
+
+
+
+/* Outros elementos no tema claro */
+.input-icon.light-mode {
+    filter: invert(0);
+}
+.container-search {
+    position: relative; /* Adicionado para garantir que as sugestões se posicionem corretamente em relação a este contêiner */
+    z-index: 10; /* Garante que o campo de pesquisa fique acima dos outros elementos */
+}
+.suggestions {
+    border: 1px solid #ccc;
+    max-height: 150px;
+    overflow-y: auto;
+    background-color: white;
+    position: absolute;
+    width: 200px;
+    z-index: 1000;
+    display: none; /* Inicialmente escondido */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 5px;
+    border-radius: 8px;
+    transform: translateY(-15px);
+    color: #000;
+    margin-left: 50px;
+
+}
+
+.suggestions div {
+    padding: 1px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 14px;
+    transform: translateY(-1px);
+}
+
+.suggestions div:hover {
+    background-color: #f0f0f0;
+    color: #000;
+}
+.input-group {
+    display: flex;
+    align-items: center;
+    background-color: #3e3e3e;
+    padding: 9px;
+    border-radius: 10px;
+    gap: 8px;
+    position: relative; /* Para garantir que o conteúdo da pesquisa se posicione corretamente */
+}
+    
+     
+        
+    </style>
+</head>
+<body>
+    <!-- Barra de navegação lateral -->
+    <div class="sidebar">
+        <a href="../html/listar_produtos.html"><img src="../imagenss/caracteristicas (2).png" alt="listarProduto">
+        <span>Listar Produtos</span></a>
+        <a href="../html/cadastrarProduto.html"><img src="../imagenss/adicionar-produto.png"alt="adicionarProduto">
+        <span>Cadastrar Produtos</span></a>
+        <a href="../html/retirarProduto.html"><img src="../imagenss/excluir-produto.png" alt="excluirProduto">
+        <span>Retirar  Produtos</span></a>
+        <a href="../html/fornecedor.html"><img src="../imagenss/entregador.png" alt="cadastrarFornecedor">
+        <span>Cadastrar Fornecedor</span></a>
+    </div>
+
+
+
+    <!-- Barra de navegação horizontal -->
+    <div class="navbar">
+        <a class="img_logo">
+            <img src="../html/imagens/logo_1.jfif"><h1>Gerenciamento de Estoque</h1 alt="Logo Projeto">
+        </a>
+
+        <div class="container-search">
+            <div  class="input-group">
+                <div class="input-icon">
+                    <i  id="input-icon" class="fa-solid fa-magnifying-glass"></i>
+                </div>
+    
+                <input id="search" 
+                type="text" 
+                class="input-field" 
+                placeholder="       Pesquisar"
+                autocomplete="off">
+                
+                
+            </div>
+            <div id="suggestions" class="suggestions"></div>
+        </div>
+        
+        <a href="../html/index.html"><img src="../imagenss/botao-home (1).png" alt="home"><br><span>Inicio</span></a>
+        <a href="#"><img src="../html/imagens/perfil.1.png" alt="perfil"><br><span>Perfil</span></a>
+        <a href="../html/landing.page.html"><img src="../imagenss/botao-de-informacao.png" alt="informacao"><br><span>Sobre</span></a>
+        <a  id="toggle-theme"  >
+            <img src="../imagenss/pretoEbranco.png" alt="pretoEbranco"><br><span>Tema</span>
+        </a>
+        </div>
+       <!-- Área de ícones de ações -->
+<div class="h2-group">
+    <div class="hist">
+        <a href="../html/historicoProdutos.php">
+            <img  src="../imagenss/desenvolvimento-de-produto (1).png" alt="Histórico de Produtos">
+            <h2>Histórico de Produtos</h2>
+        </a>
+    </div>
+    <div class="maior">
+        <a href="">
+            <img src="../imagenss/entregavel (1).png" alt="Maior Saída">
+            <h2>Maior Saída</h2>
+        </a>
+    </div>
+    <div class="graf">
+        <a href="">
+            <img src="../imagenss/grafico-de-bolo.png" alt="Gráfico de Vendas">
+            <h2>Gráfico</h2>
+        </a>
+    </div>
+</div>
+
+</body>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+    const toggleButton = document.getElementById("toggle-theme");
+    const body = document.body;
+
+    // Selecionar elementos afetados
+    const elements = [
+        body,
+        document.querySelector(".sidebar"),
+        document.querySelector(".navbar"),
+        document.querySelector(".content_form"),
+        document.querySelector(".content_table"),
+        document.querySelector(".container-search"),
+        document.querySelector(".input-group"),
+        ...document.querySelectorAll(".h2-group, .h2-group img, .h2-group h2") // Inclui ícones e textos do centro
+    ];
+
+    const themeIcon = toggleButton.querySelector("img");
+
+    // Carregar tema salvo
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "light-mode") {
+        elements.forEach(el => el && el.classList.add("light-mode"));
+        if (themeIcon) themeIcon.classList.add("light-mode");
+    }
+
+    // Alternar tema
+    toggleButton.addEventListener("click", () => {
+        const isLightMode = body.classList.contains("light-mode");
+        elements.forEach(el => el && el.classList.toggle("light-mode", !isLightMode));
+        if (themeIcon) themeIcon.classList.toggle("light-mode", !isLightMode);
+        localStorage.setItem("theme", isLightMode ? "" : "light-mode");
+    });
+});
+
+</script>
+<script>
+    const pages = {
+        "cadastro": "../html/cadastrarProduto.html",
+        "cadastrar": "../html/cadastrarProduto.html",
+        "cadastrar produto": "../html/cadastrarProduto.html",
+        "criar produto": "../html/cadastrarProduto.html",
+        "listar": "../html/listar_produtos.html",
+        "listar produto": "../html/listar_produtos.html",
+        "listar produtos": "../html/listar_produtos.html",
+        "lista": "../html/listar_produtos.html",
+        "retirar": "../html/retirarProduto.html",
+        "retira": "../html/retirarProduto.html",
+        "retirar produto": "../html/retirarProduto.html",
+        "fornecedor": "../html/fornecedor.html",
+        "cadastrar fornecedor": "../html/fornecedor.html",
+        "fornecedo": "../html/fornecedor.html",
+        "criar fornecedor": "../html/fornecedor.html",
+        "inicio": "../html/index.html",
+        "inici": "../html/index.html",
+        "home": "../html/index.html",
+        "tela inicio": "../html/index.html",
+        "sobre": "../html/landing.page.html",
+        "sobre o site": "../html/landing.page.html",
+        "sobre o software": "../html/landing.page.html",
+        "historico": "../historicoProdutos.php",
+        "historico de produtos": "../historicoProdutos.php",
+        "historicodeprodutos": "../historicoProdutos.php",
+        "historicodeproduto": "../historicoProdutos.php",
+        "historico de produto": "../historicoProdutos.php",
+    };
+
+    const searchInput = document.getElementById('search');
+    const suggestionsContainer = document.getElementById('suggestions');
+
+    // Evento de digitação
+    searchInput.addEventListener('input', () => {
+        const query = searchInput.value.toLowerCase().trim();
+        suggestionsContainer.innerHTML = ''; // Limpa sugestões anteriores
+
+        if (query) {
+            const matchingPages = Object.keys(pages).filter(page =>
+                page.toLowerCase().includes(query)
+            );
+
+            if (matchingPages.length > 0) {
+                suggestionsContainer.style.display = 'block'; // Exibe a lista
+                matchingPages.forEach(page => {
+                    const suggestion = document.createElement('div');
+                    suggestion.textContent = page;
+                    suggestion.addEventListener('click', () => {
+                        window.location.href = pages[page]; // Redireciona ao clicar
+                    });
+                    suggestionsContainer.appendChild(suggestion);
+                });
+            } else {
+                suggestionsContainer.style.display = 'none'; // Esconde se não houver resultados
+            }
+        } else {
+            suggestionsContainer.style.display = 'none'; // Esconde se o campo estiver vazio
+        }
+    });
+
+    // Redireciona ao pressionar Enter
+    searchInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            const query = searchInput.value.toLowerCase().trim();
+            if (pages[query]) {
+                window.location.href = pages[query];
+            } else {
+                alert('Página não encontrada.');
+            }
+        }
+    });
+
+    // Esconde sugestões ao clicar fora
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.container-search')) {
+            suggestionsContainer.style.display = 'none';
+        }
+    });
+</script>
+</html>

@@ -1,0 +1,27 @@
+<?php
+
+
+// if (isset($_POST([`Nome`])&& !empty ($_POST([`Nome`])){
+ $dbHost = `Localhost`;
+ $nome = `Nome`;
+ $lote = `Lote`;
+ $fabricante = `Fabricante`;
+ $validade = `Validade`;
+ $descricao = `Descricao`;
+
+ $conexao = new mysqli($dbHost, $nome , $lote, $fabricante, $validade, $descricao );
+
+ if ($conexao ->connect_erro)
+
+ {
+    echo `Erro`;
+ }
+else
+{
+    echo  `Conexao efetuada com sucesso`
+}
+
+
+
+
+?>

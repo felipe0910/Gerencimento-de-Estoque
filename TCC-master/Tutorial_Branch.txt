@@ -1,0 +1,14 @@
+1- abra a pasta do xampp htdocs
+2- com o botao direito dentro da pasta htdocs inicie o git bash
+3- dentro git bash digite os seguintes comandos
+git clone -b master https://github.com/Sergio-Fonseca01/TCC.git
+4- apos instalar a pasta pode fechar o git bash
+5- dentro da pasta htdocs clique no repositorio instalado e inicie o git bash
+6- dentro do bash escreva
+code .
+git init
+7-caso ja tenha instalado escreva
+git fetch
+git pull
+
+e pronto para usar 

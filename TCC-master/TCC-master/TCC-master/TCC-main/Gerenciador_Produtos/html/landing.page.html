@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Estoque - Sistema ERP</title>
+   
+<style>
+    * {
+       
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+ 
+    body {
+        font-family: Tahoma, Verdana, sans-serif;
+        background-color: #666666;
+        color: #efe9e9;
+    }
+ 
+ 
+ 
+    .container { /*img1*/
+        width: 300px;
+        margin: 0 auto;
+        position:center;
+        height: auto;
+        background-color: #3b3b3b;
+    }
+ 
+    .container2 { /*img1*/
+        width: 50%;
+        margin: 0 auto;
+        height: auto;
+        background-color: #666666;
+    }
+ 
+    header {
+        background-color: #414141;/*cabeçalho*/
+        float: left;
+        color: rgb(255, 255, 255);
+        padding: 20px 0;
+        text-align: center;
+        width: 100%;
+        height: 85px;
+        position: fixed;
+        margin-top: 0px !important;
+    }
+ 
+    header h1 {
+        font-size: 20px;
+        margin-bottom: 10px;
+        margin-right: 60%;
+        margin-top: -37px;
+       
+    }
+ 
+    .buttons {
+        float: right;
+        display: flex;
+        border-radius: 50px;
+        margin-right: 40px !important;
+        gap: 10px !important; /*espaco entre itens*/
+        transform: translateY(-40px);
+    }
+ 
+    .buttons button {
+        background-color: #1523a333;/*button entrar*/
+        color: rgb(255, 255, 255);
+        border: 1px solid #333;
+        padding: 10px 32px;
+        border-radius: 10px;
+        cursor: pointer;
+        width: 120px;
+    }
+ 
+    .highlight button {
+       
+        background-color: #69a36b;/*button cadastrar*/
+        color: rgb(255, 255, 255);
+        border: 1px solid #333;
+        padding: 10px 32px;
+        border-radius: 10px;
+        cursor: pointer;
+        left: 100px;
+       
+    }
+ 
+    .highlight button:hover {
+     background-color: #9a9a9a;
+    }
+ 
+    .buttons button:hover {
+        background-color: #9a9a9a;
+ }
+ 
+ 
+ 
+ 
+    .buttons button a {
+        color: rgb(255, 255, 255);
+        text-decoration: none;
+         
+    }
+ 
+    .highlight button a {
+        color: rgb(255, 255, 255);
+    }
+ 
+    .erp-intro {
+        background-color: #3b3b3b;
+        padding: 30px;
+        text-align: left; /* Alinhamento do texto à esquerda */
+        width: 60%;
+        margin-left: 20%;
+        border-radius: 10px;
+        display: flex;
+        align-items: center; /* Alinha verticalmente */
+        box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.301);
+    }
+ 
+    .erp-intro img {
+        max-width: 25% !important; /* Tamanho da imagem ajustado */
+       
+        height: auto;
+        border-radius: 10px;
+        margin-top: 10%;
+        margin-left: -200px; /* Espaçamento entre a imagem e o texto */
+        box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.301);
+    }
+ 
+    .erp-intro p {
+        font-size: 16px;
+        margin-top: -110px;
+        color:  #efe9e9;
+        background-color: #3b3b3b;
+        width: 50%; /* Ajuste a largura do texto conforme necessário */
+        margin-left: 60px;
+     
+        text-align: left;
+    }
+    .intro-content{
+        width: 900px;
+       
+        height: 350px;
+    }
+ 
+    .carousel {
+        background-color: #666666;
+        padding: 40px 0;
+        text-align: center;
+    }
+ 
+    .carousel-2 {
+        background-color: #666666;
+       
+        padding: 40px 0;
+        text-align: center;
+        margin-top: -480px;
+    }
+ 
+    .carousel p {
+        width: 200px;
+        margin-left: 20px;
+       
+    }
+ 
+    .carousel-2 p {
+        width: 200px;
+        margin-left: 20px;
+    }
+ 
+    .carousel-item {/*carousel de baixo 1*/
+        display: inline-block;
+        width: 45%;
+        height: 400px;
+        margin-left: -300px ;
+        text-align: left;
+         
+        margin-top: 100px;
+        background-color: #859D9D;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.301);
+    }
+ 
+    .carousel-item-2 {/*carousel de baixo 2*/
+        display: inline-block;
+        width: 23%;
+        height: 400px;
+       margin-top: -55px;
+       margin-left: 400px;
+        text-align: left;
+        background-color: #85909D;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.301);
+         
+         
+    }  
+ 
+    .carousel-item .carousel-icon {/*icon da imagem circular*/
+        width: 50px;
+        height: 50px;
+        background-color: #414141;
+        margin-bottom: 20px;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 250px;
+        box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.301);
+    }
+ 
+    .carousel-item-2 .carousel-icon-2 {/*icon da imagem circular*/
+        width: 50px;
+        height: 50px;
+        background-color: #414141;
+        margin-bottom: 20px;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 250px;
+        box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.301);
+    }
+ 
+    .erp-highlight {/*seletor amarelo*/
+        background-color: #C1B177;
+        padding: 30px 0;
+        text-align: center;
+       
+        color: #ffffff;
+        height: auto;
+        width: 40%;
+        margin-top: 90px;
+        margin-left: 30% !important;
+        margin-bottom: 100px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.301);
+    }
+ 
+    .erp-highlight h2 {
+        font-size: 'Roboto' 24px;
+        margin-bottom: 20px;
+       
+   
+ 
+ 
+    }
+ 
+    .erp-highlight p {
+        margin-left: 150px;
+        font-size: 11px;
+        text-align: center
+       
+         
+               
+       
+    }
+ 
+    footer {/* seletor cinza abaixo da pagina*/
+        background-color: #414141;
+        color: white;
+        padding: 20px 0;
+        text-align: center;
+        font-size: 12px;
+    }
+ 
+    .footerCopy {
+        background-color: #414141;
+    }
+ 
+    .icon {
+        width: 50px;
+        height: 50px;
+        margin-right: 9000px;
+        transform: translateX(30px);
+    }
+ 
+    .carousel-iconLogo {/* icon corrousel-2*/
+        height: auto;
+        width: 40px;
+        border-radius: 10px;
+        margin-left: 190px;
+        /* transform: translateX(  190px); */
+        margin-top: 70px;
+        box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.301);
+    }
+    .carousel-iconLogo1 {/*icon do carousel-1*/
+        height: auto;
+        width: 40px;
+        margin-right: 20px;
+        /* transform: translateX(650px); */
+    }
+ 
+    .carousel-iconLogo-2 {/*icon do carousel-3*/
+        height: auto;
+        width: 40px;
+        margin-left: 195px;
+        /* transform: translateX(  1195px); */
+        margin-top: 70px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.301);
+    }
+ 
+    .text1{
+        text-align: left;
+ 
+    }
+    .container-search {
+    position: relative; /* Adicionado para garantir que as sugestões se posicionem corretamente em relação a este contêiner */
+    z-index: 10; /* Garante que o campo de pesquisa fique acima dos outros elementos */
+}
+.suggestions {
+    border: 1px solid #ccc;
+    max-height: 150px;
+    overflow-y: auto;
+    background-color: white;
+    position: absolute;
+    width: 200px;
+    z-index: 1000;
+    display: none; /* Inicialmente escondido */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 5px;
+    border-radius: 8px;
+    transform: translateY(-15px);
+    color: #000;
+    margin-left: 50px;
+
+}
+
+.suggestions div {
+    padding: 1px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 14px;
+    transform: translateY(-1px);
+}
+
+.suggestions div:hover {
+    background-color: #f0f0f0;
+    color: #000;
+}
+.input-group {
+    display: flex;
+    align-items: center;
+    background-color: #3e3e3e;
+    padding: 9px;
+    border-radius: 10px;
+    gap: 8px;
+    position: relative; /* Para garantir que o conteúdo da pesquisa se posicione corretamente */
+}
+
+</style>
+   
+</head>
+<body>
+    <header>
+        <i class="icon">
+            <img src="../html/imagens/Logo_Projeto.png" alt="Logo" class="icon">
+        </i>
+        <h1>Gerenciamento de Estoque</h1>
+        <nav>
+            <div class="buttons">
+                <button id="button"> <a href="../html/logarUsuario.html">Entrar</a></button>
+                <div class="highlight ">
+                    <button type="submit" id="button"> <a href="../html/cadastrarUsuario.html">Cadastrar</a></button>
+                </div>    
+            </div>
+        </div>
+    </header><br><br><br><br><br><br><br><br><br><br><br>
+ 
+    <main>
+        <section class="erp-intro">
+            <div class="container">
+                <div class="intro-content">
+                    <img src="../html/imagens/ger1.jpg" alt="Imagem do Sistema ERP">
+                    <p class="text1">
+                        Um sistema ERP (Enterprise Resource Planning) é uma plataforma integrada de gestão empresarial que reúne diversas funcionalidades em um único software. Ele permite que diferentes departamentos de uma empresa compartilhem informações e trabalhem de forma mais coesa e eficiente.
+                    </p>
+                    <img src="../html/imagens/Logo_Projeto.png" class="carousel-iconLogo1">
+                </div>
+            </div>
+        </section>
+ 
+        <section class="carousel">
+            <div class="container2">
+                <div class="carousel-item">
+                    <div> <img src="../html/imagens/ger2.png" class="carousel-icon"> </div>
+                    <p>Na prática, um sistema ERP oferece uma plataforma integrada que automatiza os processos operacionais e gerenciais, permitindo uma gestão mais eficiente.</p><br>
+                    <div> <img src="../html/imagens/Logo_Projeto.png" class="carousel-iconLogo"> </div>
+                </div>
+            </section><br><br><br>
+ 
+ 
+            <section class="carousel-2">
+                <div class="carousel-item-2">
+                    <div> <img src="../html/imagens/ger3.png" class="carousel-icon-2"> </div>
+                    <p>Na prática, um sistema ERP integra diversas funcionalidades em um único software, oferecendo uma visão completa e centralizada da gestão empresarial.</p><br>
+                    <div> <img src="../html/imagens/Logo_Projeto.png" class="carousel-iconLogo-2"> </div>
+                </div>
+            </div>
+       
+ 
+        <section class="erp-highlight">
+            <div class="">
+                <h2>Sistema ERP</h2>
+                <p>Transforme a eficiência da sua gestão com uma plataforma de ERP integrada.</p>
+            </div>
+        </section>
+    </main>
+ 
+    <footer>
+        <div class="container">
+            <p class="footerCopy">&copy; 2024 Gerenciamento de Estoque. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+    <script>
+        const pages = {
+            "cadastro": "../html/cadastrarProduto.html",
+            "cadastrar": "../html/cadastrarProduto.html",
+            "cadastrar produto": "../html/cadastrarProduto.html",
+            "criar produto": "../html/cadastrarProduto.html",
+            "listar": "../html/listar_produtos.html",
+            "listar produto": "../html/listar_produtos.html",
+            "listar produtos": "../html/listar_produtos.html",
+            "lista": "../html/listar_produtos.html",
+            "retirar": "../html/retirarProduto.html",
+            "retira": "../html/retirarProduto.html",
+            "retirar produto": "../html/retirarProduto.html",
+            "fornecedor": "../html/fornecedor.html",
+            "cadastrar fornecedor": "../html/fornecedor.html",
+            "fornecedo": "../html/fornecedor.html",
+            "criar fornecedor": "../html/fornecedor.html",
+            "inicio": "../html/index.html",
+            "inici": "../html/index.html",
+            "home": "../html/index.html",
+            "tela inicio": "../html/index.html",
+            "sobre": "../html/landing.page.html",
+            "sobre o site": "../html/landing.page.html",
+            "sobre o software": "../html/landing.page.html",
+        };
+    
+        const searchInput = document.getElementById('search');
+        const suggestionsContainer = document.getElementById('suggestions');
+    
+        // Evento de digitação
+        searchInput.addEventListener('input', () => {
+            const query = searchInput.value.toLowerCase().trim();
+            suggestionsContainer.innerHTML = ''; // Limpa sugestões anteriores
+    
+            if (query) {
+                const matchingPages = Object.keys(pages).filter(page =>
+                    page.toLowerCase().includes(query)
+                );
+    
+                if (matchingPages.length > 0) {
+                    suggestionsContainer.style.display = 'block'; // Exibe a lista
+                    matchingPages.forEach(page => {
+                        const suggestion = document.createElement('div');
+                        suggestion.textContent = page;
+                        suggestion.addEventListener('click', () => {
+                            window.location.href = pages[page]; // Redireciona ao clicar
+                        });
+                        suggestionsContainer.appendChild(suggestion);
+                    });
+                } else {
+                    suggestionsContainer.style.display = 'none'; // Esconde se não houver resultados
+                }
+            } else {
+                suggestionsContainer.style.display = 'none'; // Esconde se o campo estiver vazio
+            }
+        });
+    
+        // Redireciona ao pressionar Enter
+        searchInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                const query = searchInput.value.toLowerCase().trim();
+                if (pages[query]) {
+                    window.location.href = pages[query];
+                } else {
+                    alert('Página não encontrada.');
+                }
+            }
+        });
+    
+        // Esconde sugestões ao clicar fora
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.container-search')) {
+                suggestionsContainer.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
